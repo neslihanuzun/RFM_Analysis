@@ -37,10 +37,10 @@ df.head()
 df["last_order_date"].max()
 today_date = dt.datetime(2021, 6, 1)
 type(today_date)
-df['first_order_date'] = df['first_order_date'].astype('datetime64[ns]')
-df['last_order_date'] = df['last_order_date'].astype('datetime64[ns]')
-df['last_order_date_online'] = df['last_order_date_online'].astype('datetime64[ns]')
-df['last_order_date_offline'] = df['last_order_date_offline'].astype('datetime64[ns]')
+
+for i in df.columns:
+    if "date" in i:
+       df[i] = df[i].astype("datetime64[ns]")
 
 
 df.groupby('order_channel').agg({"master_id": lambda master_id : master_id.nunique(),
